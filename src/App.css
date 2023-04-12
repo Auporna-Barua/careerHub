@@ -3,3 +3,19 @@
   padding: 0;
   box-sizing: border-box;
 }
+/* hero section */
+.hero-section {
+  background: #f9f9ff;
+}
+.hero-img {
+  max-width: 600px;
+}
+.hero-img {
+  width: 100%;
+}
+
+/* category card */
+.card figure {
+  justify-content: start !important;
+  padding-left: 15px;
+}
