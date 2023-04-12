@@ -2,7 +2,13 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
-import { createBrowserRouter } from 'react-router-dom';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import Blog from './Blog';
+import Statistics from './Statistics';
+import Applied from './Applied';
+import Details from './Details';
+import Error from './Error';
+import { ToastContainer } from 'react-toastify';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -14,7 +20,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/Statistics",
-    element: <Statistic />,
+    element: <Statistics />,
   },
   {
     path: "/applied",
@@ -30,8 +36,9 @@ const router = createBrowserRouter([
     element: <Error />,
   },
 ]);
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+    <RouterProvider router={router} />
+    <ToastContainer />
+  </React.StrictMode>
+);
