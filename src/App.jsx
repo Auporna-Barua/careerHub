@@ -14,6 +14,7 @@ import icon4 from "./assets/Icons/chip 1.png";
 import Category from "./components/category/Category";
 import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
+import Job from "./components/job/Job";
 
 function App() {
   const category = [
@@ -38,6 +39,15 @@ function App() {
       des: "224 Jobs Available",
     },
   ];
+    const [jobs, setJobs] = useState([]);
+    const [length, setLength] = useState(4);
+    useEffect(() => {
+      axios
+        .get("data.json")
+        .then((response) => setJobs(response.data))
+        .catch((error) => console.log(error));
+    }, []);
+    localStorage.setItem("jobs", JSON.stringify(jobs));
   return (
     <>
       <Header />
@@ -55,6 +65,27 @@ function App() {
             <Category key={i} cat={cat} />
           ))}
         </div>
+      </div>
+      <div className="my-20 w-10/12 mx-auto" id="jobs">
+        <div className="text-center">
+          <h2 className="text-2xl md:text-3xl font-bold">Featured Jobs</h2>
+          <p className="text-gray-500">
+            Explore thousands of job opportunities with all the information you
+            need. Its your future
+          </p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mt-10">
+          {jobs &&
+            jobs.slice(0, length).map((job) => <Job key={job.id} job={job} />)}
+        </div>
+        {jobs && jobs.length !== length && (
+          <button
+            className="btn btn-outline border mx-auto block mt-10  border-[#818DFE] hover:bg-[#818DFE] outline-none hover:border-[#818DFE]"
+            onClick={() => setLength(jobs?.length)}
+          >
+            See all jobs
+          </button>
+        )}
       </div>
       <Footer />
     </>
